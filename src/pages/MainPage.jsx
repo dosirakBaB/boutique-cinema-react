@@ -1,5 +1,11 @@
 import React from "react";
 
 export default function MainPage() {
-  return <div>Page Not Found</div>;
+  return (
+    <>
+      <div>MainPage</div>
+      <div>123</div>
+      <div>Page Not Found</div>
+    </>
+  );
 }
