@@ -5,6 +5,7 @@ export default function MainPage() {
     <>
       <div>MainPage</div>
       <div>123</div>
+      <div>Page Not Found</div>
     </>
   );
 }
