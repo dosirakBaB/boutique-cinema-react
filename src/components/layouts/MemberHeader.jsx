@@ -13,10 +13,13 @@ const HEADER_MENU = [
 export default function MemberHeader() {
   return (
     <header className="relative w-full pt-3">
+      <h1 className="sr-only">Boutique Cinema</h1>
       <ul className="mb-8 flex justify-end gap-4 text-sm">
         {HEADER_MENU.map((item) => (
           <li className="hover:text-secondary">
-            <Link to={item.url}>{item.title}</Link>
+            <Link to={item.url}>
+              <h2>{item.title}</h2>
+            </Link>
           </li>
         ))}
       </ul>
