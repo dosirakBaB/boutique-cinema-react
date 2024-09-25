@@ -35,6 +35,10 @@ const root = createBrowserRouter([
     path: "/member/JoinPage",
     element: <JoinPage />,
   },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+  },
 ]);
 
 export default root;
