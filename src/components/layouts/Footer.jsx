@@ -22,11 +22,19 @@ export default function Footer() {
         <div className="w-[35%] border-r border-r-gray-500 px-8">
           <ul className="flex h-full flex-col justify-between">
             <li>
-              <h2>회사소개</h2>
+              <Link to={"info"}>
+                <h2>회사소개</h2>
+              </Link>
             </li>
-            <li>이용약관</li>
-            <li>개인정보처리방침</li>
-            <li>스크린 배정수에 관한 기준</li>
+            <li>
+              <Link to={"/support/terms"}>이용약관</Link>
+            </li>
+            <li>
+              <Link to={"/support/privacy"}>개인정보처리방침</Link>
+            </li>
+            <li>
+              <Link to={"/support/screenrule"}>스크린 배정수에 관한 기준</Link>
+            </li>
           </ul>
         </div>
         <div className="flex h-full w-[40%] flex-col justify-between pl-8">
