@@ -5,8 +5,8 @@ import Logo from "../common/Logo";
 import { Link } from "react-router-dom";
 
 const HEADER_MENU = [
-  { title: "로그인", url: "/login" },
-  { title: "회원가입", url: "/join" },
+  { title: "로그인", url: "/member/login" },
+  { title: "회원가입", url: "/member/join" },
   { title: "고객센터", url: "/support" },
 ];
 

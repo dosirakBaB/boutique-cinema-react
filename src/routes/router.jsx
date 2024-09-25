@@ -32,7 +32,7 @@ const root = createBrowserRouter([
     ],
   },
   {
-    path: "/member/JoinPage",
+    path: "/member/join",
     element: <JoinPage />,
   },
   {
