@@ -15,10 +15,8 @@ export default function BasicLayout() {
       <div className="my-5 border-b border-gray-400"></div>
       <div className="mx-auto flex w-layout py-5">
         {pathname.includes("/mypage") ? <MemberSidebar /> : <></>}
-        <main>
-          <div>
-            <Outlet />
-          </div>
+        <main className="w-full">
+          <Outlet />
         </main>
       </div>
       <Footer />

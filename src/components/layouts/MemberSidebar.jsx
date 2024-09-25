@@ -11,7 +11,7 @@ const NAV_MENU = [
 
 export default function MemberSidebar() {
   return (
-    <nav className="h-fit w-fit rounded-lg border-none bg-tertiary">
+    <nav className="h-fit w-1/4 rounded-lg border-none bg-tertiary">
       <div className="w-full rounded-t-lg border-b border-none bg-secondary pb-2 pt-6">
         <div className="px-6 text-lg">
           안녕하세요. &nbsp;<strong>차지훈</strong>님
