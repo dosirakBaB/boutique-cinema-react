@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import greetingRouter from "../router/greetingRouter";
 import JoinPage from "../pages/member/JoinPage";
 
 const BasicLayout = lazy(() => import("../layouts/BasicLayout"));
@@ -9,8 +10,6 @@ const InfoPage = lazy(() => import("../pages/info/InfoPage"));
 const TermsPage = lazy(() => import("../pages/support/TermsPage"));
 const ScreenrulePage = lazy(() => import("../pages/support/ScreenrulePage"));
 const PrivacyPage = lazy(() => import("../pages/support/PrivacyPage"));
-const TheaterPage = lazy(() => import("../pages/greeting/TheaterPage"));
-const CouplePage = lazy(() => import("../pages/greeting/CouplePage"));
 
 // const MyReservationPage = lazy(
 //   () => import("../pages/mypage/MyReservationPage"),
@@ -26,8 +25,7 @@ const root = createBrowserRouter([
       { path: "/support/terms", element: <TermsPage /> },
       { path: "/support/screenrule", element: <ScreenrulePage /> },
       { path: "/support/privacy", element: <PrivacyPage /> },
-      { path: "/greeting/teater", element: <TheaterPage /> },
-      { path: "/greeting/couple", element: <CouplePage /> },
+      ...greetingRouter, // greetingRouter의 경로들을 병합
       // { path: "mypage/reserve", element: <MyReservationPage /> },
     ],
   },
