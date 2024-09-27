@@ -1,6 +1,7 @@
 // 회원가입 페이지
 import { useState } from "react";
 import Logo from "../common/Logo";
+import { postAdd } from "../../api/membersApi";
 
 function JoinPage() {
   const [form, setForm] = useState({
@@ -243,7 +244,18 @@ function JoinPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate() === true) {
-      // Submit form data
+      // 오늘 날짜를 YYYY-MM-DD 형식으로 생성
+      const today = new Date();
+      const joinDate = today.toISOString().split("T")[0]; // YYYY-MM-DD 형식
+
+      // 폼 데이터에 날짜 추가
+      const formDataWithDate = {
+        ...form,
+        joinDate,
+      };
+
+      postAdd(form); // JSON 형식으로 서버에 보냄
+
       console.log("Form submitted:", form);
       alert("회원가입이 완료됐습니다.");
       window.location.href = "/";
@@ -261,7 +273,7 @@ function JoinPage() {
           className="w-[330px] rounded-lg bg-white p-5 shadow-md"
         >
           <h2 className="mb-2 text-lg font-medium text-black">회원가입</h2>
-          <div className="mb-4 overflow-hidden rounded border border-gray-300">
+          <div className="overflow-hidden rounded border border-gray-300">
             <input
               type="text"
               name="id"
@@ -271,15 +283,16 @@ function JoinPage() {
               maxLength={20}
               className="box-border h-full w-full p-2 text-sm text-black"
             />
-            {idError && (
-              <small
-                className={`${isIdAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
-              >
-                {idError}
-              </small>
-            )}
           </div>
-          <div className="mb-4 overflow-hidden rounded border border-gray-300">
+          {idError && (
+            <small
+              className={`${isIdAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
+            >
+              {idError}
+            </small>
+          )}
+
+          <div className="mt-4 overflow-hidden rounded border border-gray-300">
             <input
               type="password"
               name="password"
@@ -289,16 +302,16 @@ function JoinPage() {
               maxLength={20}
               className="box-border h-full w-full p-2 text-sm text-black"
             />
-            {pwError && (
-              <small
-                className={`${isPwAvailable ? "" : "text-red-600"} p-2 text-[10px]`}
-              >
-                {pwError}
-              </small>
-            )}
           </div>
+          {pwError && (
+            <small
+              className={`${isPwAvailable ? "" : "text-red-600"} p-2 text-[10px]`}
+            >
+              {pwError}
+            </small>
+          )}
 
-          <div className="mb-4 overflow-hidden rounded border border-gray-300">
+          <div className="mt-4 overflow-hidden rounded border border-gray-300">
             <input
               type="password"
               name="passwordConfirm"
@@ -308,16 +321,16 @@ function JoinPage() {
               maxLength={20}
               className="box-border h-full w-full p-2 text-sm text-black"
             />
-            {pwConfirmError && (
-              <small
-                className={`${isPwConfirmPassword ? "" : "text-red-600"} p-2 text-[10px]`}
-              >
-                {pwConfirmError}
-              </small>
-            )}
           </div>
+          {pwConfirmError && (
+            <small
+              className={`${isPwConfirmPassword ? "" : "text-red-600"} p-2 text-[10px]`}
+            >
+              {pwConfirmError}
+            </small>
+          )}
 
-          <div className="mb-4 overflow-hidden rounded border border-gray-300">
+          <div className="mt-4 overflow-hidden rounded border border-gray-300">
             <input
               type="email"
               name="email"
@@ -326,16 +339,16 @@ function JoinPage() {
               placeholder="이메일"
               className="box-border h-full w-full p-2 text-sm text-black"
             />
-            {emailError && (
-              <small
-                className={`${isEmailAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
-              >
-                {emailError}
-              </small>
-            )}
           </div>
+          {emailError && (
+            <small
+              className={`${isEmailAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
+            >
+              {emailError}
+            </small>
+          )}
 
-          <div className="mb-4 overflow-hidden rounded border border-gray-300">
+          <div className="mt-4 overflow-hidden rounded border border-gray-300">
             <input
               type="text"
               name="name"
@@ -347,15 +360,15 @@ function JoinPage() {
               maxLength={20}
               className="box-border h-full w-full p-2 text-sm text-black"
             />
-            <small
-              className={`${isNameFocused ? "text-red-600" : ""} p-2 text-[10px]`}
-            >
-              {isNameFocused && "이름은 반드시 실명만 입력해주세요."}{" "}
-              {/* 포커스가 있을 때만 메시지 출력 */}
-            </small>
           </div>
+          <small
+            className={`${isNameFocused ? "text-red-600" : ""} p-2 text-[10px]`}
+          >
+            {isNameFocused && "이름은 반드시 실명만 입력해주세요."}{" "}
+            {/* 포커스가 있을 때만 메시지 출력 */}
+          </small>
 
-          <div className="mb-4 overflow-hidden rounded border border-gray-300">
+          <div className="overflow-hidden rounded border border-gray-300">
             <input
               type="text"
               name="birth"
@@ -366,16 +379,16 @@ function JoinPage() {
               maxLength={8}
               className="box-border h-full w-full p-2 text-sm text-black"
             />
-            {birthError && (
-              <small
-                className={`${isBirthAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
-              >
-                {birthError}
-              </small>
-            )}
           </div>
+          {birthError && (
+            <small
+              className={`${isBirthAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
+            >
+              {birthError}
+            </small>
+          )}
 
-          <div className="mb-4 overflow-hidden rounded border border-gray-300">
+          <div className="mt-4 overflow-hidden rounded border border-gray-300">
             <input
               type="text"
               name="phone"
@@ -386,15 +399,16 @@ function JoinPage() {
               placeholder="휴대폰 번호(예:01012345678)"
               className="box-border h-full w-full p-2 text-sm text-black"
             />
-            {phoneError && (
-              <small
-                className={`${isPhoneAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
-              >
-                {phoneError}
-              </small>
-            )}
           </div>
-          <h2 className="mb-2 font-medium text-black">이용약관 동의</h2>
+          {phoneError && (
+            <small
+              className={`${isPhoneAvailable ? "text-blue-600" : "text-red-600"} p-2 text-[10px]`}
+            >
+              {phoneError}
+            </small>
+          )}
+
+          <h2 className="mb-2 mt-4 font-medium text-black">이용약관 동의</h2>
 
           <div className="h-200 mb-4 justify-center overflow-hidden rounded border border-gray-300 bg-gray-100 p-2">
             <div className="flex h-5 w-full items-center justify-end text-black">
@@ -478,6 +492,7 @@ function JoinPage() {
 
           <button
             type="submit"
+            onClick={handleSubmit}
             className="w-full cursor-pointer rounded border-none bg-gray-700 p-2 text-white"
           >
             가입완료
