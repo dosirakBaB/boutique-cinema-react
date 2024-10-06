@@ -52,6 +52,7 @@ const AdminMovieListPage = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchExecuted(true); // 검색이 실행되었음을 설정
+    setCurrentPage(1); // 검색 시 현재 페이지를 1로 초기화
   };
 
   // 검색어를 포함한 영화 목록 필터링
@@ -163,10 +164,7 @@ const AdminMovieListPage = () => {
               </thead>
               <tbody>
                 {filteredMovies
-                  .slice(
-                    (currentPage - 1) * moviesPerPage,
-                    currentPage * moviesPerPage,
-                  )
+                  .slice(0, moviesPerPage) // 필터링된 영화 목록의 처음 10개 아이템만 표시
                   .map((movie, index) => (
                     <tr
                       key={movie.movieNum}
@@ -255,3 +253,5 @@ const AdminMovieListPage = () => {
 };
 
 export default AdminMovieListPage; // AdminMovieListPage 컴포넌트 내보내기
+
+//검색 시 현재 페이지를 1로 초기화: setCurrentPage(1);를 handleSearch 함수 내에 추가 //필터링된 영화 목록 슬라이스: filteredMovies.slice(0, moviesPerPage)로 변경하여 필터링된 영화 목록에서 처음 10개만 표시
